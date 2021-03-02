@@ -16,6 +16,18 @@ export class XssExperienceComponent implements OnInit {
   ngOnInit() {
     this.xssService.getXssList()
       .subscribe(xss => this.xssList = xss);
+
+    // load a standard JS into the HTML
+    this.loadScript('assets/httpUtils.js');
   }
 
+  private loadScript(scriptUrl: string) {
+    return new Promise((resolve, reject) => {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = scriptUrl;
+      scriptElement.onload = resolve;
+      console.log(scriptElement);
+      document.body.appendChild(scriptElement);
+    });
+  }
 }
