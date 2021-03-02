@@ -1,0 +1,13 @@
+package com.example.springplay;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringplayApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringplayApplication.class, args);
+	}
+
+}
