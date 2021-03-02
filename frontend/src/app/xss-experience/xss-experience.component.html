@@ -1,4 +1,10 @@
-<p>
+<!--  {{xssList[0].text}}-->
 
-  {{xssList[0].text}}
-</p>
+<p>Table</p>
+<table>
+  <tr *ngFor="let xss of xssList">
+    <td>{{ xss.id }}</td>
+    <td>{{ xss.text }}</td>
+  </tr>
+</table>
+
