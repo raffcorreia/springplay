@@ -1,6 +1,6 @@
 <!--  {{xssList[0].text}}-->
 
-<div class="divTable">
+<div class="divTable" xmlns="http://www.w3.org/1999/html">
   <div class="divTableBody">
     <div class="divTableRow">
       <div class="divTableCell">
@@ -9,9 +9,44 @@
           rows="5"
           style="width:100%;"
         ></textarea>
-        <br>
-        <button
-          (click)="addXssEntry()">ADD</button>
+      </div>
+    </div>
+    <div class="divTableRow">
+      <div class="divTableCell">
+        <div style="display: inline; padding-right:50px">
+          ID:
+          <input
+            type="text"
+            [(ngModel)]="txtId"
+            style="width:100px;"
+          >
+          <button
+            (click)="clearId()"
+          >
+            NEW
+          </button>
+        </div>
+        <div style="display: inline; padding-right:50px">
+          <button
+            (click)="clearALL()"
+          >
+            CLEAN
+          </button>
+        </div>
+        <div style="display: inline; padding-right:50px">
+          <button
+            (click)="delXssEntry()"
+          >
+            DEL
+          </button>
+        </div>
+        <div style="display: inline; padding-right:50px">
+          <button
+            (click)="saveXssEntry()"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
     </div>
   </div>

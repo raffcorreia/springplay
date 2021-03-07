@@ -10,6 +10,8 @@ export class XssService {
 
   private readonly getXSSUrl: string = '/getXSS';
   private readonly postXSSUrl: string = '/postXSS';
+  private readonly putXSSUrl: string = '/putXSS';
+  private readonly delXSSUrl: string = '/delXSS';
 
   constructor(private http: HttpClient) {
   }
@@ -23,8 +25,16 @@ export class XssService {
     return this.http.get<Xss>(url);
   }
 
-  postXss(txtBox: string) {
-    console.log(txtBox);
-    return this.http.post<Xss>(this.postXSSUrl, {text: txtBox});
+  postXss(xss: string) {
+    return this.http.post<Xss>(this.postXSSUrl, {text: xss});
+  }
+
+  putXss(currentid: number, text: string) {
+    return this.http.put<Xss>(this.putXSSUrl, {id: currentid, text: text});
+  }
+
+  delXss(id: number) {
+    const url = this.delXSSUrl + '/' + id;
+    return this.http.delete<Xss>(url);
   }
 }

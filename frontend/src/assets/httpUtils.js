@@ -9,28 +9,22 @@ function jsRBUpdate(rb) {
 }
 
 function handleGetById(jsonObj) {
-  console.log(jsonObj);
-
   let element = document.getElementById("divJsByIdPlaceholder");
   cleanAllChildren(element);
 
   var c = document.createElement('span');
   c.innerHTML = jsonObj.text;
-  console.log(c);
   element.appendChild(c);
 }
 
 
 function appendLoop(jsonObj) {
-  console.log(jsonObj.length);
-
   let element = document.getElementById("divJsPlaceholder");
   cleanAllChildren(element);
 
   for(let i=0; i < jsonObj.length; i++) {
     var c = document.createElement('span');
     c.innerHTML = jsonObj[i].text;
-    console.log(c);
     element.appendChild(c)
   }
 }

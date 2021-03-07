@@ -8,12 +8,13 @@ import {Xss} from '../services/xss';
   styleUrls: ['./xss-experience.component.sass']
 })
 export class XssExperienceComponent implements OnInit {
+  private xssList: Xss[];
+  private selectedXssText: string;
+  private txtBox = '';
+  private txtId: number = null;
 
   constructor(private xssService: XssService) { }
 
-  xssList: Xss[];
-  selectedXssText: string;
-  txtBox = '';
 
   ngOnInit() {
     this.updateXssList();
@@ -28,8 +29,8 @@ export class XssExperienceComponent implements OnInit {
   }
 
   customTrackBy(index: number, obj: any): any {
-    console.log(index);
-    console.log(obj);
+    // console.log(index);
+    // console.log(obj);
     return index;
   }
 
@@ -38,18 +39,51 @@ export class XssExperienceComponent implements OnInit {
       const scriptElement = document.createElement('script');
       scriptElement.src = scriptUrl;
       scriptElement.onload = resolve;
-      console.log(scriptElement);
       document.body.appendChild(scriptElement);
     });
   }
 
   xssSelectionChanged(id: number) {
+    this.txtId = id;
     this.xssService.getXssById(id)
-      .subscribe(xss => this.selectedXssText = xss.text);
+      .subscribe(xss => this.loadForm(xss));
   }
 
-  addXssEntry() {
-    this.xssService.postXss(this.txtBox)
-      .subscribe(xss => this.selectedXssText = xss.text);
+  saveXssEntry() {
+    if (this.txtId === null) {
+      this.xssService.postXss(this.txtBox)
+        .subscribe(xss => this.loadAndRefreshForm(xss));
+    } else {
+      this.xssService.putXss(this.txtId, this.txtBox )
+        .subscribe(xss => this.loadAndRefreshForm(xss));
+    }
   }
+
+  delXssEntry() {
+    console.log(this.txtId);
+    if (this.txtId !== null) {
+      this.xssService.delXss(this.txtId).subscribe();
+      this.updateXssList();
+    }
+  }
+
+  loadForm(xss: Xss) {
+    this.selectedXssText = xss.text;
+    this.txtBox = xss.text;
+    this.txtId = xss.id;
+  }
+
+  loadAndRefreshForm(xss: Xss) {
+    this.loadForm(xss);
+    this.updateXssList();
+  }
+  clearId() {
+    this.txtId = null;
+  }
+
+  clearALL() {
+    this.clearId();
+    this.txtBox = '';
+  }
+
 }
