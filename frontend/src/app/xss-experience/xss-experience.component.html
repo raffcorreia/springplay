@@ -1,5 +1,63 @@
 <!--  {{xssList[0].text}}-->
 
+<div class="divTable">
+  <div class="divTableBody">
+    <div class="divTableRow">
+      <div class="divTableCell">
+        <textarea
+          [(ngModel)]="txtBox"
+          rows="5"
+          style="width:100%;"
+        ></textarea>
+        <br>
+        <button
+          (click)="addXssEntry()">ADD</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divTable">
+  <div class="divTableBody">
+    <div class="divTableRow">
+      <div class="divTableCellLeft">
+        <div *ngFor="let xss of xssList; trackBy: customTrackBy">
+          <input
+            type="radio"
+            name="radiogroup"
+            id="rb_{{xss.id}}"
+            value={{xss.id}}
+            [(ngModel)]="xss.id"
+            (ngModelChange)="xssSelectionChanged($event)"
+            onchange="jsRBUpdate(this)"
+          />
+          <label for="rb_{{xss.id}}">{{xss.text}}</label>
+        </div>
+      </div>
+      <div class="divTableCellRight">
+        <div>
+          {{selectedXssText}}
+        </div>
+        <br>
+        <div id="divJsByIdPlaceholder">
+          <span id="spanJsByIdPlaceholder"></span>
+        </div>
+      </div>
+    </div>
+    <div class="divTableRow">
+      <div class="divTableCellLeft">&nbsp;</div>
+      <div class="divTableCellRight">&nbsp;</div>
+    </div>
+  </div>
+</div>
+<div class="divTable">
+  <div class="divTableBody">
+    <div class="divTableRow">
+      <div class="divTableCell">&nbsp;</div>
+    </div>
+  </div>
+</div>
+
+
 <p>Table</p>
 <table>
   <tr *ngFor="let xss of xssList">
@@ -11,7 +69,7 @@
 <br>
 
 <a *ngFor="let xss of xssList">
-{{ xss.text }}
+  {{ xss.text }}
 </a>
 
 <br>

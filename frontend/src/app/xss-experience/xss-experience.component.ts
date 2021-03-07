@@ -12,13 +12,25 @@ export class XssExperienceComponent implements OnInit {
   constructor(private xssService: XssService) { }
 
   xssList: Xss[];
+  selectedXssText: string;
+  txtBox = '';
 
   ngOnInit() {
-    this.xssService.getXssList()
-      .subscribe(xss => this.xssList = xss);
+    this.updateXssList();
 
     // load a standard JS into the HTML
     this.loadScript('assets/httpUtils.js');
+  }
+
+  private updateXssList() {
+    this.xssService.getXssList()
+      .subscribe(xss => this.xssList = xss);
+  }
+
+  customTrackBy(index: number, obj: any): any {
+    console.log(index);
+    console.log(obj);
+    return index;
   }
 
   private loadScript(scriptUrl: string) {
@@ -29,5 +41,15 @@ export class XssExperienceComponent implements OnInit {
       console.log(scriptElement);
       document.body.appendChild(scriptElement);
     });
+  }
+
+  xssSelectionChanged(id: number) {
+    this.xssService.getXssById(id)
+      .subscribe(xss => this.selectedXssText = xss.text);
+  }
+
+  addXssEntry() {
+    this.xssService.postXss(this.txtBox)
+      .subscribe(xss => this.selectedXssText = xss.text);
   }
 }
