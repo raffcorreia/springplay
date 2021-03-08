@@ -47,7 +47,7 @@ public class XssController {
         return xssService.putXSS(xssEntity);
     }
 
-    @RequestMapping(value = "/deleteXSS/{id}", method = RequestMethod.DELETE
+    @RequestMapping(value = "/delXSS/{id}", method = RequestMethod.DELETE
     )
     @ResponseBody
     public void putXSS(@PathVariable Long id) {
