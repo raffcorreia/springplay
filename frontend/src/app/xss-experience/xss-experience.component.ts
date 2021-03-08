@@ -62,8 +62,7 @@ export class XssExperienceComponent implements OnInit {
   delXssEntry() {
     console.log(this.txtId);
     if (this.txtId !== null) {
-      this.xssService.delXss(this.txtId).subscribe();
-      this.updateXssList();
+      this.xssService.delXss(this.txtId).subscribe(() => {this.updateXssList(); } );
     }
   }
 
@@ -86,4 +85,7 @@ export class XssExperienceComponent implements OnInit {
     this.txtBox = '';
   }
 
+  isRadioButtonSelected(id: number) {
+    return id == this.txtId;
+  }
 }

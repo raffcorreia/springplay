@@ -61,6 +61,7 @@
             name="radiogroup"
             id="rb_{{xss.id}}"
             value={{xss.id}}
+            [checked]="isRadioButtonSelected(xss.id)"
             [(ngModel)]="xss.id"
             (ngModelChange)="xssSelectionChanged($event)"
             onchange="jsRBUpdate(this)"
