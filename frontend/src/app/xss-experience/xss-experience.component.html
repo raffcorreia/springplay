@@ -1,115 +1,116 @@
 <!--  {{xssList[0].text}}-->
-
-<div class="divTable" xmlns="http://www.w3.org/1999/html">
-  <div class="divTableBody">
-    <div class="divTableRow">
-      <div class="divTableCell">
-        <textarea
-          [(ngModel)]="txtBox"
-          rows="5"
-          style="width:100%;"
-        ></textarea>
+<div id="main">
+  <div class="divTable" xmlns="http://www.w3.org/1999/html">
+    <div class="divTableBody">
+      <div class="divTableRow">
+        <div class="divTableCell">
+          <textarea
+            [(ngModel)]="txtBox"
+            rows="5"
+            style="width:100%;"
+          ></textarea>
+        </div>
       </div>
-    </div>
-    <div class="divTableRow">
-      <div class="divTableCell">
-        <div style="display: inline; padding-right:50px">
-          ID:
-          <input
-            type="text"
-            [(ngModel)]="txtId"
-            style="width:100px;"
-          >
-          <button
-            (click)="clearId()"
-          >
-            NEW
-          </button>
-        </div>
-        <div style="display: inline; padding-right:50px">
-          <button
-            (click)="clearALL()"
-          >
-            CLEAN
-          </button>
-        </div>
-        <div style="display: inline; padding-right:50px">
-          <button
-            (click)="delXssEntry()"
-          >
-            DEL
-          </button>
-        </div>
-        <div style="display: inline; padding-right:50px">
-          <button
-            (click)="saveXssEntry()"
-          >
-            SAVE
-          </button>
+      <div class="divTableRow">
+        <div class="divTableCell">
+          <div style="display: inline; padding-right:50px">
+            ID:
+            <input
+              type="text"
+              [(ngModel)]="txtId"
+              style="width:100px;"
+            >
+            <button
+              (click)="clearId()"
+            >
+              NEW
+            </button>
+          </div>
+          <div style="display: inline; padding-right:50px">
+            <button
+              (click)="clearALL()"
+            >
+              CLEAN
+            </button>
+          </div>
+          <div style="display: inline; padding-right:50px">
+            <button
+              (click)="delXssEntry()"
+            >
+              DEL
+            </button>
+          </div>
+          <div style="display: inline; padding-right:50px">
+            <button
+              (click)="saveXssEntry()"
+            >
+              SAVE
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="divTable">
-  <div class="divTableBody">
-    <div class="divTableRow">
-      <div class="divTableCellLeft">
-        <div *ngFor="let xss of xssList; trackBy: customTrackBy">
-          <input
-            type="radio"
-            name="radiogroup"
-            id="rb_{{xss.id}}"
-            value={{xss.id}}
-            [checked]="isRadioButtonSelected(xss.id)"
-            [(ngModel)]="xss.id"
-            (ngModelChange)="xssSelectionChanged($event)"
-            onchange="jsRBUpdate(this)"
-          />
-          <label for="rb_{{xss.id}}">{{xss.text}}</label>
+  <div class="divTable">
+    <div class="divTableBody">
+      <div class="divTableRow">
+        <div class="divTableCellLeft">
+          <div *ngFor="let xss of xssList; trackBy: customTrackBy">
+            <input
+              type="radio"
+              name="radiogroup"
+              id="rb_{{xss.id}}"
+              value={{xss.id}}
+              [checked]="isRadioButtonSelected(xss.id)"
+              [(ngModel)]="xss.id"
+              (ngModelChange)="xssSelectionChanged($event)"
+              onchange="jsRBUpdate(this)"
+            />
+            <label for="rb_{{xss.id}}">{{xss.text}}</label>
+          </div>
+        </div>
+        <div class="divTableCellRight">
+          <div>
+            {{selectedXssText}}
+          </div>
+          <br>
+          <div id="divJsByIdPlaceholder">
+            <span id="spanJsByIdPlaceholder"></span>
+          </div>
         </div>
       </div>
-      <div class="divTableCellRight">
-        <div>
-          {{selectedXssText}}
-        </div>
-        <br>
-        <div id="divJsByIdPlaceholder">
-          <span id="spanJsByIdPlaceholder"></span>
-        </div>
+      <div class="divTableRow">
+        <div class="divTableCellLeft">&nbsp;</div>
+        <div class="divTableCellRight">&nbsp;</div>
       </div>
     </div>
-    <div class="divTableRow">
-      <div class="divTableCellLeft">&nbsp;</div>
-      <div class="divTableCellRight">&nbsp;</div>
+  </div>
+  <div class="divTable">
+    <div class="divTableBody">
+      <div class="divTableRow">
+        <div class="divTableCell">&nbsp;</div>
+      </div>
     </div>
   </div>
+
+
+  <p>Table</p>
+  <table>
+    <tr *ngFor="let xss of xssList">
+      <td>{{ xss.id }}</td>
+      <td>{{ xss.text }}</td>
+    </tr>
+  </table>
+
+  <br>
+
+  <a *ngFor="let xss of xssList">
+    {{ xss.text }}
+  </a>
+
+  <br>
+  <br>
+  <br>
+
+  <div id="divJsPlaceholder"></div>
 </div>
-<div class="divTable">
-  <div class="divTableBody">
-    <div class="divTableRow">
-      <div class="divTableCell">&nbsp;</div>
-    </div>
-  </div>
-</div>
-
-
-<p>Table</p>
-<table>
-  <tr *ngFor="let xss of xssList">
-    <td>{{ xss.id }}</td>
-    <td>{{ xss.text }}</td>
-  </tr>
-</table>
-
-<br>
-
-<a *ngFor="let xss of xssList">
-  {{ xss.text }}
-</a>
-
-<br>
-<br>
-<br>
-
-<div id="divJsPlaceholder"></div>
