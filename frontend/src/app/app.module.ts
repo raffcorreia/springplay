@@ -7,12 +7,14 @@ import { XssExperienceComponent } from './xss-experience/xss-experience.componen
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
+import { SqlInjectionComponent } from './sql-injection/sql-injection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     XssExperienceComponent,
-    HeaderComponent
+    HeaderComponent,
+    SqlInjectionComponent
   ],
   imports: [
     BrowserModule,

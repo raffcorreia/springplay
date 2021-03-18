@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {XssExperienceComponent} from './xss-experience/xss-experience.component';
+import {SqlInjectionComponent} from './sql-injection/sql-injection.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'xss-experience',
     component: XssExperienceComponent
+  },
+  {
+    path: 'sql-injection',
+    component: SqlInjectionComponent
   }
 ];
 
