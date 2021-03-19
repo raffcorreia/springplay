@@ -8,10 +8,10 @@ import {Xss} from '../services/xss';
   styleUrls: ['./xss-experience.component.sass']
 })
 export class XssExperienceComponent implements OnInit {
-  private xssList: Xss[];
-  private selectedXssText: string;
-  private txtBox = '';
-  private txtId: number = null;
+  xssList: Xss[];
+  selectedXssText: string;
+  txtBox = '';
+  txtId: number = null;
 
   constructor(private xssService: XssService) { }
 
