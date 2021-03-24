@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { XssExperienceComponent } from './xss-experience/xss-experience.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { SqlInjectionComponent } from './sql-injection/sql-injection.component';
+import {APIInterceptor} from "./config/APIInterceptor";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,11 @@ import { SqlInjectionComponent } from './sql-injection/sql-injection.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: APIInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
