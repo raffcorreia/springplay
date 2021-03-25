@@ -35,12 +35,18 @@ export class XssExperienceComponent implements OnInit {
   }
 
   private loadScript(scriptUrl: string) {
-    return new Promise((resolve, reject) => {
-      const scriptElement = document.createElement('script');
-      scriptElement.src = scriptUrl;
-      scriptElement.onload = resolve;
-      document.body.appendChild(scriptElement);
-    });
+    if(!this.scriptExists(scriptUrl)) {
+      return new Promise((resolve, reject) => {
+        const scriptElement = document.createElement('script');
+        scriptElement.src = scriptUrl;
+        scriptElement.onload = resolve;
+        document.body.appendChild(scriptElement);
+      });
+    }
+  }
+
+  private scriptExists(url): boolean {
+    return document.querySelector(`script[src="${url}"]`) !== null;
   }
 
   xssSelectionChanged(id: number) {
