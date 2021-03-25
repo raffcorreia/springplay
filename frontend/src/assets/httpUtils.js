@@ -1,5 +1,5 @@
 
-const getXssUrl = 'http://localhost:4200/getXSS';
+const getXssUrl = 'http://localhost:8080/api/experience/xss/getXSS';
 
 httpGet(appendLoop, getXssUrl);
 
@@ -35,8 +35,9 @@ function httpGet(handler, theUrl) {
     if (xmlHttp.readyState === 4 && xmlHttp.status === 200)
       handler(JSON.parse(xmlHttp.responseText));
   }
-  xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-  xmlHttp.send( null );
+  xmlHttp.open( "GET", theUrl, false);
+  xmlHttp.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=');
+  xmlHttp.send( null);
 }
 
 function cleanAllChildren(element) {
