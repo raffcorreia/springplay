@@ -1,5 +1,5 @@
 
-const getXssUrl = 'http://localhost:8080/api/experience/xss/getXSS';
+const getXssUrl = '/api/experience/xss/getXSS';
 
 httpGet(appendLoop, getXssUrl);
 
