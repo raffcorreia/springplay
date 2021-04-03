@@ -3,9 +3,6 @@ package com.example.springplay.sqlinjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
 
 import static java.util.Objects.nonNull;
 
@@ -19,15 +16,14 @@ public class SqlInjectionService {
     JdbcTemplate jdbcTemplate;
 
     public SqlInjectionLoginResponse loginJPA(SqlInjectionLoginRequest loginRequest) {
-        List<LoginEntity> logins = loginRepository.findAllByNameAndPassword(
+        LoginEntity login = loginRepository.findOneByNameAndPassword(
                 loginRequest.getName(), loginRequest.getPassword());
 
-        return new SqlInjectionLoginResponse(!CollectionUtils.isEmpty(logins) && nonNull(logins.get(0)));
+        return new SqlInjectionLoginResponse(nonNull(login));
     }
 
     public SqlInjectionLoginResponse loginJDBC(SqlInjectionLoginRequest loginRequest) {
-        List<LoginEntity> logins = jdbcTemplate.query(
-
+        LoginEntity login = jdbcTemplate.queryForObject(
                 "SELECT ID, NAME, PASSWORD " +
                     "FROM dbo.TB_LOGIN " +
                     "WHERE NAME = '" + loginRequest.getName() + "'" +
@@ -38,7 +34,7 @@ public class SqlInjectionService {
                 )
         );
 
-        return new SqlInjectionLoginResponse(!CollectionUtils.isEmpty(logins) && nonNull(logins.get(0)));
+        return new SqlInjectionLoginResponse(nonNull(login));
     }
 
 }
