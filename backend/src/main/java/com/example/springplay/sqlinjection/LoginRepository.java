@@ -9,4 +9,5 @@ import java.util.List;
 public interface LoginRepository extends JpaRepository<LoginEntity, Long> {
 
     List<LoginEntity> findAllByName(String name);
+    List<LoginEntity> findAllByNameAndPassword(String name, String password);
 }

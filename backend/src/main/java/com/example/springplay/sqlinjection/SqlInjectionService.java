@@ -18,19 +18,11 @@ public class SqlInjectionService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
     public SqlInjectionLoginResponse loginJPA(SqlInjectionLoginRequest loginRequest) {
-        List<LoginEntity> logins = loginRepository.findAllByName(loginRequest.getName());
+        List<LoginEntity> logins = loginRepository.findAllByNameAndPassword(
+                loginRequest.getName(), loginRequest.getPassword());
 
-        SqlInjectionLoginResponse response = new SqlInjectionLoginResponse();
-
-        LoginEntity login = logins.stream()
-                .filter(l -> l.getPassword().equals(loginRequest.getPassword()))
-                .findFirst().orElse(null);
-
-        response.setAuthenticated(nonNull(login));
-
-        return response;
+        return new SqlInjectionLoginResponse(!CollectionUtils.isEmpty(logins) && nonNull(logins.get(0)));
     }
 
     public SqlInjectionLoginResponse loginJDBC(SqlInjectionLoginRequest loginRequest) {
