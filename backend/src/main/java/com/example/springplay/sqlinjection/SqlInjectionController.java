@@ -24,4 +24,12 @@ public class SqlInjectionController {
         return sqlInjectionService.loginJPA(loginRequest);
     }
 
+    @RequestMapping(value = "/loginJDBC", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @ResponseBody
+    public SqlInjectionLoginResponse loginJDBC(@RequestBody SqlInjectionLoginRequest loginRequest) {
+        return sqlInjectionService.loginJDBC(loginRequest);
+    }
 }
