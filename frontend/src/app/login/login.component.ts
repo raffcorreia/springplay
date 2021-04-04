@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
+    @Input() title: string = "Login";
 
     loginForm: FormGroup;
     loading = false;
