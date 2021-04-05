@@ -11,13 +11,13 @@ export class LoginComponent implements OnInit {
     @Input() title: string = "Login";
     @Input() defaultUsername: string = "";
     @Input() defaultPassword: string = "";
-    @Input() loginSuccessful: boolean = null;
     @Output() submitLogin: EventEmitter<{ userName: string, password: string }> = new EventEmitter();
 
     loginForm: FormGroup;
     loading = false;
     submitted = false;
     returnUrl: string;
+    loginSuccessful: boolean = null;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     doLogin() {
+        this.loading = true;
         this.submitted = true;
 
         if (this.loginForm.invalid) {
@@ -49,9 +50,11 @@ export class LoginComponent implements OnInit {
             userName:this.formControls.username.value,
             password:this.formControls.password.value
         });
+    }
 
-        // TODO: improve the loading functionality to wait for a response.
+    loginResult(isSuccess: boolean) {
         this.loading = false;
+        this.loginSuccessful = isSuccess;
     }
 
 }

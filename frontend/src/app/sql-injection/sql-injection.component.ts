@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SqlInjectionService} from "../services/sql-injection.service";
+import {LoginComponent} from "../login/login.component";
 
 
 @Component({
@@ -10,8 +11,9 @@ import {SqlInjectionService} from "../services/sql-injection.service";
 export class SqlInjectionComponent implements OnInit {
   defaultUserName: string = 'test \' AND 1=1; --';
   defaultPassword: string = 'WRONG_PASSWORD';
-  jpaLoginSuccessful: boolean = null;
-  jdbcLoginSuccessful: boolean = null;
+
+  @ViewChild('loginJPA') loginJPA: LoginComponent;
+  @ViewChild('loginJDBC') loginJDBC: LoginComponent;
 
   constructor(
       private sqlInjectionService: SqlInjectionService
@@ -20,21 +22,21 @@ export class SqlInjectionComponent implements OnInit {
   ngOnInit() {
   }
 
+  processLoginResult(result: { authenticated: boolean }, loginComponent: LoginComponent) {
+      console.log("IsAuthenticated = " + result.authenticated);
+      loginComponent.loginResult(result.authenticated);
+  }
+
   submitLoginJPA($event: { userName: string; password: string }){
     console.log('sql-inj-component submitting...');
     return this.sqlInjectionService.loginUsingJPA($event.userName, $event.password)
         .subscribe(
             data => {
-              this.jpaLoginSuccessful = data.authenticated;
-              if(data.authenticated) {
-                console.log("OK!")
-              } else {
-                console.log("Login Failure!")
-              }
+                this.processLoginResult(data, this.loginJPA);
             },
             error => {
-              this.jpaLoginSuccessful = false;
-              console.log("ERROR!")
+                console.log("ERROR!");
+                this.processLoginResult({ authenticated: false }, this.loginJPA);
             });
   }
 
@@ -43,16 +45,11 @@ export class SqlInjectionComponent implements OnInit {
         return this.sqlInjectionService.loginUsingJDBC($event.userName, $event.password)
             .subscribe(
                 data => {
-                    this.jdbcLoginSuccessful = data.authenticated;
-                    if(data.authenticated) {
-                        console.log("OK!")
-                    } else {
-                        console.log("Login Failure!")
-                    }
+                    this.processLoginResult(data, this.loginJDBC);
                 },
                 error => {
-                    this.jdbcLoginSuccessful = false;
-                    console.log("ERROR!")
+                    console.log("ERROR!");
+                    this.processLoginResult({ authenticated: false }, this.loginJDBC);
                 });
     }
 }
