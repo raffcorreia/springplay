@@ -3,10 +3,26 @@
         <div class="divTableBody">
             <div class="divTableRow">
                 <div class="divTableCellLeft">
-                    <app-login title="Login using JPA"></app-login>
+                    <app-login
+                            id="loginJPA"
+                            title="Login using JPA"
+                            [defaultUsername]="defaultUserName"
+                            [defaultPassword]="defaultPassword"
+                            [loginSuccessful]="jpaLoginSuccessful"
+                            (submitLogin)="submitLoginJPA($event)"
+                    >
+                    </app-login>
                 </div>
                 <div class="divTableCellRight">
-                    <app-login title="Login using JDBC"></app-login>
+                    <app-login
+                            id="loginJDBC"
+                            title="Login using JDBC"
+                            [defaultUsername]="defaultUserName"
+                            [defaultPassword]="defaultPassword"
+                            [loginSuccessful]="jdbcLoginSuccessful"
+                            (submitLogin)="submitLoginJDBC($event)"
+                    >
+                    </app-login>
                 </div>
             </div>
         </div>

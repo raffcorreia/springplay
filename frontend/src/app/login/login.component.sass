@@ -29,12 +29,16 @@
     background-clip: padding-box
     border: 1px solid #ced4da
     border-radius: .25rem
+    z-index: 2000
     &.is-invalid
       border-color: #dc3545
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E")
       background-repeat: no-repeat
       background-position: center right calc(.375em + .1875rem)
       background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+
+.form-control-controls
+  display: flex
 
 
 h2
@@ -44,6 +48,7 @@ h2
   text-align: center
 
 .btn
+  height: 38px
   display: inline-block
   font-weight: 400
   color: #212529
@@ -74,3 +79,20 @@ h2
   margin-top: .25rem
   font-size: 80%
   color: #dc3545
+
+.result-message
+  flex-grow: 100
+  display: inline
+  text-align: center
+  font-size: 80px
+  p
+    font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif
+    margin: -30px 0 0 0
+    padding: 0 0 0 0
+    font-weight: 400
+    z-index: 2
+    position: relative
+    &.ok
+      color: green
+    &.error
+      color: red

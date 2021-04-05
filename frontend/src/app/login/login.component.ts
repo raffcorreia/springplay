@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -7,7 +7,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
+    @Input() id = '';
     @Input() title: string = "Login";
+    @Input() defaultUsername: string = "";
+    @Input() defaultPassword: string = "";
+    @Input() loginSuccessful: boolean = null;
+    @Output() submitLogin: EventEmitter<{ userName: string, password: string }> = new EventEmitter();
 
     loginForm: FormGroup;
     loading = false;
@@ -24,6 +29,9 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+
+        this.formControls.username.setValue(this.defaultUsername);
+        this.formControls.password.setValue(this.defaultPassword);
     }
 
     get formControls() {
@@ -37,8 +45,13 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
+        this.submitLogin.emit({
+            userName:this.formControls.username.value,
+            password:this.formControls.password.value
+        });
 
+        // TODO: improve the loading functionality to wait for a response.
+        this.loading = false;
     }
 
 }
