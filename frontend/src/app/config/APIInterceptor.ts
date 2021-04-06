@@ -9,7 +9,7 @@ export class APIInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log("Intercepting...")
-        const apiReq = req.clone({ url: this.BASE_URL + `${req.url}` });
+        const apiReq = req.clone({url: this.BASE_URL + `${req.url}`});
         return next.handle(apiReq);
     }
 }

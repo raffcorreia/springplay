@@ -1,6 +1,7 @@
 <div id="main">
     <p>
-        This form is to show how a bad database query and login service implementations open vulnerabilities to malicious users. Such vulnerabilities would allow even a table drop since the application is connecting as SA
+        This form is to show how a bad database query and login service implementations open vulnerabilities to
+        malicious users. Such vulnerabilities would allow even a table drop since the application is connecting as SA
         The correct credentials stored in the DB are; test/test, user/user.
     </p>
     <div class="divTable">
@@ -8,23 +9,23 @@
             <div class="divTableRow">
                 <div class="divTableCellLeft">
                     <app-login
-                            #loginJPA
-                            id="loginJPA"
-                            title="Login using JPA"
-                            [defaultUsername]="defaultUserName"
-                            [defaultPassword]="defaultPassword"
-                            (submitLogin)="submitLoginJPA($event)"
+                        #loginJPA
+                        id="loginJPA"
+                        title="Login using JPA"
+                        [defaultUsername]="defaultUserName"
+                        [defaultPassword]="defaultPassword"
+                        (submitLogin)="submitLoginJPA($event)"
                     >
                     </app-login>
                 </div>
                 <div class="divTableCellRight">
                     <app-login
-                            #loginJDBC
-                            id="loginJDBC"
-                            title="Login using JDBC"
-                            [defaultUsername]="defaultUserName"
-                            [defaultPassword]="defaultPassword"
-                            (submitLogin)="submitLoginJDBC($event)"
+                        #loginJDBC
+                        id="loginJDBC"
+                        title="Login using JDBC"
+                        [defaultUsername]="defaultUserName"
+                        [defaultPassword]="defaultPassword"
+                        (submitLogin)="submitLoginJDBC($event)"
                     >
                     </app-login>
                 </div>

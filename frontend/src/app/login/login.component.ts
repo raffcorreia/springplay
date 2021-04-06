@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
         }
 
         this.submitLogin.emit({
-            userName:this.formControls.username.value,
-            password:this.formControls.password.value
+            userName: this.formControls.username.value,
+            password: this.formControls.password.value
         });
     }
 
