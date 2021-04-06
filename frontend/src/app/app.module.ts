@@ -10,6 +10,7 @@ import {HeaderComponent} from './header/header.component';
 import {SqlInjectionComponent} from './sql-injection/sql-injection.component';
 import {APIInterceptor} from "./config/APIInterceptor";
 import {LoginComponent} from './login/login.component';
+import { WebSocketComponent } from './web-socket/web-socket.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {LoginComponent} from './login/login.component';
         XssExperienceComponent,
         HeaderComponent,
         SqlInjectionComponent,
-        LoginComponent
+        LoginComponent,
+        WebSocketComponent
     ],
     imports: [
         BrowserModule,

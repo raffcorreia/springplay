@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {XssExperienceComponent} from './xss-experience/xss-experience.component';
 import {SqlInjectionComponent} from './sql-injection/sql-injection.component';
+import {WebSocketComponent} from "./web-socket/web-socket.component";
 
 const routes: Routes = [
     {
@@ -16,6 +17,10 @@ const routes: Routes = [
     {
         path: 'sql-injection',
         component: SqlInjectionComponent
+    },
+    {
+        path: 'web-socket',
+        component: WebSocketComponent
     }
 ];
 
