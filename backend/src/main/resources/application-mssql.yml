@@ -1,0 +1,14 @@
+spring:
+    datasource:
+        url: jdbc:sqlserver://localhost:1433;database=ceserver
+        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        username: sa
+        password: p@ssw0rd
+
+logging:
+    level:
+        root: DEBUG
+
+springplay:
+    security:
+        jwt-key: ThisIsAJWTSignatureSample

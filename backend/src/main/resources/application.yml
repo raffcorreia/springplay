@@ -1,9 +1,16 @@
 spring:
     datasource:
-        url: jdbc:sqlserver://localhost:1433;database=ceserver
-        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        url: jdbc:h2:file:./backend/src/main/resources/db/demo;MODE=MSSQLServer
+        driverClassName: org.h2.Driver
         username: sa
-        password: p@ssw0rd
+        password: password
+        initialization-mode: always
+        continue-on-error: true
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.H2Dialect
 
 logging:
     level:
