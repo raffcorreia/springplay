@@ -3,8 +3,10 @@ package com.example.springplay.validation;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -37,4 +39,11 @@ public class ValidationRequest {
 
     @Future(message = "Expire date must be in the future")
     private Date expireDate;
+
+    @NotNull(message = "Project names can't be null")
+    private List<String> projectNames;
+
+    @Valid
+    @NotNull(message = "Contacts can't be null")
+    private List<@NotNull Contact> contacts;
 }
