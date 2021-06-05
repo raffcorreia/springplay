@@ -1,6 +1,7 @@
 spring:
     datasource:
-        url: jdbc:h2:file:./backend/src/main/resources/db/demo;MODE=MSSQLServer
+        url: jdbc:h2:file:~/dev/data/springplay/h2/demo;MODE=MSSQLServer
+
         driverClassName: org.h2.Driver
         username: sa
         password: password
