@@ -1,5 +1,6 @@
 package com.example.springplay.validation;
 
+import com.example.springplay.validation.annotation.NoAs;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,4 +47,7 @@ public class ValidationRequest {
     @Valid
     @NotNull(message = "Contacts can't be null")
     private List<@NotNull Contact> contacts;
+
+    @NoAs
+    private String noLetterAmessage;
 }
