@@ -9,7 +9,7 @@ import {LoginComponent} from "../login/login.component";
     styleUrls: ['./sql-injection.component.sass']
 })
 export class SqlInjectionComponent implements OnInit {
-    defaultUserName: string = 'test \' AND 1=1; --';
+    defaultUserName: string = 'test\' AND 1=1; --';
     defaultPassword: string = 'WRONG_PASSWORD';
 
     @ViewChild('loginJPA') loginJPA: LoginComponent;
