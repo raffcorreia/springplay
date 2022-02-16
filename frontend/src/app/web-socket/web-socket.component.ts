@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-web-socket',
