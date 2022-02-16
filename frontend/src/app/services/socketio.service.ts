@@ -14,6 +14,8 @@ export class SocketioService {
   setupSocketConnection() {
     this.socket = io(environment.SOCKET_ENDPOINT)
 
+    this.socket.emit('my message', 'Hello there from Angular.');
+
     this.socket.on('my broadcast', (data: string) => {
       console.log(data);
     });

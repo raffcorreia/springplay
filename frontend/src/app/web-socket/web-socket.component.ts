@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
+import {SocketioService} from "../services/socketio.service";
 
 @Component({
   selector: 'app-web-socket',
@@ -8,9 +9,13 @@ import { io } from 'socket.io-client';
 })
 export class WebSocketComponent implements OnInit {
 
-  constructor() { }
+  constructor(private socketService: SocketioService) { }
 
   ngOnInit() {
+    this.socketService.setupSocketConnection();
   }
 
+  ngOnDestroy() {
+    this.socketService.disconnect();
+  }
 }
