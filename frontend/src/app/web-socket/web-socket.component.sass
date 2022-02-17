@@ -1,0 +1,103 @@
+#main
+  margin: 8px
+
+.divTable
+  display: table
+  width: 100%
+
+.divTableRow
+  display: table-row
+
+.divTableCell, .divTableCellLeft, .divTableCellRight
+  border: 1px solid #999999
+  display: table-cell
+  padding: 3px 10px
+
+.divTableCellLeft, .divTableCellRight
+  width: 50%
+
+
+.divTableBody
+  display: table-row-group
+
+
+// ---
+
+.main
+  border: 5px solid lightblue
+  background-color: lightblue
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+  font-size: 16px
+  left: 50%
+  position: relative
+  transform: translate(-50%, 0)
+
+.form-group
+  width: 600px
+  min-width: 600px
+  position: relative
+  left: 50%
+  transform: translateX(-50%)
+  padding-left: 2px
+  padding-right: 2px
+  font-size: 1rem
+  font-weight: 400
+  line-height: 1.5
+  text-align: left
+
+  .form-control
+    display: block
+    width: 100%
+    box-sizing: border-box
+    padding: .375rem .75rem
+    font-size: 1rem
+    font-weight: 400
+    color: #495057
+    background-color: #fff
+    background-clip: padding-box
+    border: 1px solid #ced4da
+    border-radius: .25rem
+    z-index: 2000
+
+.form-control-controls
+  display: flex
+
+textarea
+  height: 500px
+  width: 100%
+  box-sizing: border-box
+
+h2
+  margin: 0 0 8px 0
+  font-size: 2rem
+  font-weight: 500
+  text-align: center
+
+.btn
+  height: 38px
+  display: inline-block
+  font-weight: 400
+  color: #212529
+  text-align: center
+  vertical-align: middle
+  user-select: none
+  border: 1px solid transparent
+  padding: .375rem .75rem
+  font-size: 1rem
+  line-height: 1.5
+  border-radius: .25rem
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+
+  &.focus, &:focus
+    outline: 0
+    box-shadow: 0 0 0 0.2rem #8bbef3
+
+  &:hover
+    background-color: #004503
+
+.btn-primary
+  color: #fff
+  background-color: #6DB54C
+
+  &.focus, &:focus
+    box-shadow: 0 0 0 0.2rem #8bbef3

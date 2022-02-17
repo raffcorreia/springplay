@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  SOCKET_ENDPOINT: '127.0.0.1:3000'
+  SOCKET_IO_ENDPOINT: 'localhost:3000'
 };
 
 /*

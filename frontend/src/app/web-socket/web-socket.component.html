@@ -1,3 +1,44 @@
-<p>
-  web-socket works!
-</p>
+<div id="main">
+  <p>
+    This form is to play with websockets.
+  </p>
+  <div class="divTable">
+    <div class="divTableBody">
+      <div class="divTableRow">
+        <div class="divTableCellLeft">
+
+          <div class="form-group">
+            <h2>Socket IO to Node BE</h2>
+            <textarea
+                    id="stIONode_msgsTxt"
+                    [(ngModel)]="stIONode_msgsTxt"
+                    readonly
+                    class="form-control"
+            ></textarea>
+
+            <input
+                    id="stIONode_sendTxt"
+                    [(ngModel)]="stIONode_sendTxt"
+                    type="text"
+                    autocomplete="off"
+                    class="form-control"
+            />
+
+            <button
+                    id="sIONode_btnSend"
+                    (click)="sIONode_send()"
+                    class="btn btn-primary"
+            >
+              Send
+            </button>
+
+          </div>
+
+        </div>
+        <div class="divTableCellRight">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
