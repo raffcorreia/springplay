@@ -30,7 +30,11 @@ io.on('connection', (socket) => {
 
     socket.on('message', ({ message, roomName }, callback) => {
         console.log("message: " + message + " in " + roomName);
-        socket.to(roomName).emit("message", message);
+        // send to all in room EXCEPT sender
+        // socket.to(roomName).emit("message", message);
+
+        // send to all in room INCLUDING sender
+        io.to(roomName).emit("message", message);
     });
 
 });
