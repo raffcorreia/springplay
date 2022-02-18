@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SocketioService} from "../services/socketio.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-const socketIOEventName : string = "socketIOEvent";
+const socketIOEventName = "socketIOEvent";
+const roomName = "publicRoom";
 
 @Component({
   selector: 'app-web-socket',
@@ -28,6 +29,8 @@ export class WebSocketComponent implements OnInit {
     this.socketService.msgReceived.subscribe( response => {
       this.updateMsgBoard(response);
     })
+
+    this.socketService.joinRoom(roomName);
   }
 
   ngOnDestroy() {
@@ -35,7 +38,7 @@ export class WebSocketComponent implements OnInit {
   }
 
   sIONode_send() {
-    this.updateMsgBoard(this.socketService.sendMessage(this.stIONode_sendTxt));
+    this.socketService.sendMessage( { message: this.stIONode_sendTxt, roomName: roomName} );
   }
 
   private updateMsgBoard(newMessage: string) {

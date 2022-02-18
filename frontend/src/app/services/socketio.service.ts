@@ -4,6 +4,8 @@ import {io} from "socket.io-client";
 
 const user : string = "user";
 
+const myRandomChatRoomId = 'myRandomChatRoomId';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,9 +24,19 @@ export class SocketioService {
     this.socket = io(environment.SOCKET_IO_ENDPOINT)
 
     this.socket.on(this.eventName, (data: string) => {
-      this.msgReceived.emit(data);
       console.log(data);
+      this.msgReceived.emit(data);
     });
+
+    this.socket.on('message', msg => {
+      console.log('Room event received!');
+      console.log(msg);
+      this.msgReceived.emit(msg);
+    });
+  }
+
+  joinRoom(roomName: string) {
+    this.socket.emit('join', roomName);
   }
 
   disconnect() {
@@ -33,9 +45,9 @@ export class SocketioService {
     }
   }
 
-  sendMessage(stIONode_sendTxt: any) : string {
-    var msg = this.getFullTimestamp() + " (" + user + "): " + stIONode_sendTxt;
-    this.socket.emit(this.eventName, msg);
+  sendMessage(msgObj: {message, roomName}) : string {
+    var msg = this.getFullTimestamp() + " (" + user + "): " + msgObj.message;
+    if (this.socket) this.socket.emit('message', { message: msg, roomName: msgObj.roomName});
     return msg;
   }
 

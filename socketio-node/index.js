@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
 
-    console.log('a user connected');
+    console.log('a user ${socket.conn.id} connected');
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
@@ -23,7 +23,16 @@ io.on('connection', (socket) => {
         console.log('message: ' + msg);
     });
 
-    sendRandomMessage();
+    socket.on("join", (roomName) => {
+        console.log("join: " + roomName);
+        socket.join(roomName);
+    });
+
+    socket.on('message', ({ message, roomName }, callback) => {
+        console.log("message: " + message + " in " + roomName);
+        socket.to(roomName).emit("message", message);
+    });
+
 });
 
 http.listen(3000, () => {
@@ -49,3 +58,5 @@ function getFullTimestamp() {
 
     return `${pad(d.getFullYear(),4)}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${pad(d.getMilliseconds(),3)}`;
 }
+
+sendRandomMessage();
