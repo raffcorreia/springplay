@@ -45,16 +45,7 @@ export class SocketioService {
     }
   }
 
-  sendMessage(msgObj: {message, roomName}) : string {
-    var msg = this.getFullTimestamp() + " (" + user + "): " + msgObj.message;
-    if (this.socket) this.socket.emit('message', { message: msg, roomName: msgObj.roomName});
-    return msg;
-  }
-
-  private getFullTimestamp () {
-    const pad = (n,s=2) => (`${new Array(s).fill(0)}${n}`).slice(-s);
-    const d = new Date();
-
-    return `${pad(d.getFullYear(),4)}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${pad(d.getMilliseconds(),3)}`;
+  sendMessage(msgObj: {message, roomName}) {
+    if (this.socket) this.socket.emit('message', msgObj);
   }
 }

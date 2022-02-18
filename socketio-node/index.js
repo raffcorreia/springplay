@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
 
-    console.log('a user ${socket.conn.id} connected');
+    console.log(`a user ${socket.conn.id} connected`);
 
     socket.on('disconnect', () => {
         console.log('user disconnected');
@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
         // socket.to(roomName).emit("message", message);
 
         // send to all in room INCLUDING sender
-        io.to(roomName).emit("message", message);
+        io.to(roomName).emit("message", `${getFullTimestamp()} (${socket.conn.id}) ${message}`);
     });
 
 });
