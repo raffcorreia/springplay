@@ -12,8 +12,8 @@ export class SqlInjectionComponent implements OnInit {
     defaultUserName: string = 'test\' AND 1=1; --';
     defaultPassword: string = 'WRONG_PASSWORD';
 
-    @ViewChild('loginJPA') loginJPA: LoginComponent;
-    @ViewChild('loginJDBC') loginJDBC: LoginComponent;
+    @ViewChild('loginJPA', {static: true}) loginJPA: LoginComponent;
+    @ViewChild('loginJDBC', {static: true}) loginJDBC: LoginComponent;
 
     constructor(
         private sqlInjectionService: SqlInjectionService

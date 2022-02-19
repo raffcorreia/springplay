@@ -11,6 +11,7 @@ import {SqlInjectionComponent} from './sql-injection/sql-injection.component';
 import {APIInterceptor} from "./config/APIInterceptor";
 import {LoginComponent} from './login/login.component';
 import { WebSocketComponent } from './web-socket/web-socket.component';
+import {SocketioService} from "./services/socketio.service";
 
 @NgModule({
     declarations: [
@@ -31,8 +32,10 @@ import { WebSocketComponent } from './web-socket/web-socket.component';
     providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: APIInterceptor,
-        multi: true,
-    }],
+        multi: true
+    },
+        SocketioService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
