@@ -15,19 +15,18 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/")
+        registry
+                .addResourceHandler("/js")
+                .addResourceLocations("classpath:/static/js/index.html")
                 .resourceChain(true)
-                .addResolver(new CustomPathResourceResolver());
-    }
-
-    static class CustomPathResourceResolver extends PathResourceResolver {
-        @Override
-        protected Resource getResource(String resourcePath, Resource location) throws IOException {
-            Resource requestedResource = location.createRelative(resourcePath);
-            return requestedResource.exists() && requestedResource.isReadable()
-                    ? requestedResource
-                    : new ClassPathResource("/static/index.html");
-        }
+                .addResolver(new PathResourceResolver() {
+                    @Override
+                    protected Resource getResource(String resourcePath, Resource location) throws IOException {
+                        Resource requestedResource = location.createRelative(resourcePath);
+                        return requestedResource.exists() && requestedResource.isReadable()
+                                ? requestedResource
+                                : new ClassPathResource("/static/js/index.html");
+                    }
+                });
     }
 }
