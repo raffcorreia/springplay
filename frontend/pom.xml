@@ -12,12 +12,6 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <build>
-        <resources>
-            <resource>
-                <directory>./dist/springplay</directory>
-                <targetPath>static</targetPath>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
