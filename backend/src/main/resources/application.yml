@@ -11,6 +11,10 @@ spring:
 logging:
     level:
         root: DEBUG
+        web: ERROR
+        org.springframework.web: ERROR
+    group:
+        tomcat: ERROR
 
 springplay:
     security:
