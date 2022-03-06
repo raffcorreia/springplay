@@ -14,7 +14,7 @@ export class APIInterceptor implements HttpInterceptor {
         const apiReq = req.clone({url: this.BASE_URL + `${req.url}`});
 
         if(isRunningAsDev) {
-            apiReq.headers.append("Basic", "YWRtaW46YWRtaW4=");
+            apiReq.headers.append("Authorization", "Basic YWRtaW46YWRtaW4=");
         }
 
         return next.handle(apiReq);
