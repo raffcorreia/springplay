@@ -11,6 +11,7 @@ import org.springframework.web.util.HtmlUtils;
 public class GreetingController {
 
     public static final String TOPIC = "/topic/greetings";
+
     @Autowired
     private SimpMessagingTemplate messageTemplate;
 

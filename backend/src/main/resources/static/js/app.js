@@ -1,3 +1,9 @@
+/*
+* This sample was extracted from Spring.io
+* Using WebSocket to build an interactive web application
+* https://spring.io/guides/gs/messaging-stomp-websocket/
+* */
+
 var stompClient = null;
 
 function setConnected(connected) {
@@ -13,7 +19,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/api/gs-guide-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -33,7 +39,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/api/sockets/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {
