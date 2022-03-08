@@ -9,7 +9,7 @@ const myRandomChatRoomId = 'myRandomChatRoomId';
 @Injectable({
   providedIn: 'root'
 })
-export class SocketioNodeService {
+export class SocketIOService {
 
   @Output() public msgReceived = new EventEmitter();
 
