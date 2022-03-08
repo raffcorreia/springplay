@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {SocketioService} from "../services/socketio.service";
+import {SocketioNodeService} from "../services/socketio.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {StompClientService} from "../services/stomp-client.service";
 
-const socketIOEventName = "socketIOEvent";
+const EVENT_NAME_NODE = "socketIOEvent";
+const EVENT_NAME_SPRING = "/topic/greetings";
 const roomName = "publicRoom";
 
 @Component({
@@ -12,36 +14,59 @@ const roomName = "publicRoom";
 })
 export class WebSocketComponent implements OnInit {
 
-  public stIONode_msgsTxt: any;
-  public stIONode_sendTxt: any;
+  public txtMsgsSIO: any;
+  public txtSendSIO: any;
+  public txtMsgsSTOMP: any;
+  public txtSendSTOMP: any;
 
   constructor(private formBuilder: FormBuilder,
-              private socketService: SocketioService
+              private socketIOService: SocketioNodeService,
+              private stompService: StompClientService
   ) {
-    this.stIONode_msgsTxt = "";
-    this.stIONode_sendTxt = "";
 
+    this.txtMsgsSIO = "";
+    this.txtSendSIO = "";
+    this.txtMsgsSTOMP = "";
+    this.txtSendSTOMP = "";
   }
 
   ngOnInit() {
-    this.socketService.setupSocketConnection(socketIOEventName);
+    // Node
+    this.socketIOService.setupSocketConnection(EVENT_NAME_NODE);
 
-    this.socketService.msgReceived.subscribe( response => {
-      this.updateMsgBoard(response);
+    this.socketIOService.msgReceived.subscribe( response => {
+      this.updateMsgBoardNode(response);
     })
 
-    this.socketService.joinRoom(roomName);
+    this.socketIOService.joinRoom(roomName);
+
+    // Spring
+    this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
+
+    this.stompService.msgReceived.subscribe( response => {
+      this.updateMsgBoardSpring(response);
+    })
+
+    // this.stompService.joinRoom(roomName);
   }
 
   ngOnDestroy() {
-    this.socketService.disconnect();
+    this.socketIOService.disconnect();
   }
 
-  sIONode_send() {
-    this.socketService.sendMessage( { message: this.stIONode_sendTxt, roomName: roomName} );
+  sendMessageSIO() {
+    this.socketIOService.sendMessage( { message: this.txtSendSIO, roomName: roomName} );
   }
 
-  private updateMsgBoard(newMessage: string) {
-    this.stIONode_msgsTxt += newMessage + "\n";
+  private updateMsgBoardNode(newMessage: string) {
+    this.txtMsgsSIO += newMessage + "\n";
+  }
+
+  sendMessageSTOMP() {
+    this.stompService.sendMessage( { message: this.txtSendSTOMP, roomName: roomName} );
+  }
+
+  private updateMsgBoardSpring(newMessage: string) {
+    this.txtMsgsSTOMP += newMessage + "\n";
   }
 }

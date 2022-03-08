@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {environment} from "../../environments/environment";
 import {io} from "socket.io-client";
+import {environment} from "../../environments/environment";
 
 const user : string = "user";
 
@@ -9,7 +9,7 @@ const myRandomChatRoomId = 'myRandomChatRoomId';
 @Injectable({
   providedIn: 'root'
 })
-export class SocketioService {
+export class SocketioNodeService {
 
   @Output() public msgReceived = new EventEmitter();
 
@@ -19,9 +19,9 @@ export class SocketioService {
   constructor() {  }
 
   setupSocketConnection(eventName : string) {
-    console.log("Entering; setupSocketConnection()")
+    console.log("Entering; setupSocketConnection(" + eventName + ") " + environment.SOCKET_ENDPOINT_SOCKET_IO);
     this.eventName = eventName;
-    this.socket = io(environment.SOCKET_IO_ENDPOINT)
+    this.socket = io(environment.SOCKET_ENDPOINT_SOCKET_IO);
 
     this.socket.on(this.eventName, (data: string) => {
       console.log(data);
