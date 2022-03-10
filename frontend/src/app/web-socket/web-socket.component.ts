@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SocketioNodeService} from "../services/socketio.service";
+import {SocketIOService} from "../services/socketio.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {StompClientService} from "../services/stomp-client.service";
 
@@ -20,7 +20,7 @@ export class WebSocketComponent implements OnInit {
   public txtSendSTOMP: any;
 
   constructor(private formBuilder: FormBuilder,
-              private socketIOService: SocketioNodeService,
+              private socketIOService: SocketIOService,
               private stompService: StompClientService
   ) {
 
