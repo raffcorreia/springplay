@@ -21,6 +21,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class WebConfigTest {
 
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String BASIC_AUTH = "Basic YWRtaW46YWRtaW4=";
+    public static final String JWT_AUTH = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiIsImlhdCI6MTYxNzQxOTA4MiwiZXhwIjozMjUwMzY3OTk5OX0.tMWTHmBUYIPA06H5TJMaYadF3xbHRTeGAfjb1OGcsds";
+
     @Autowired
     private MockMvc mvc;
 
@@ -28,7 +32,32 @@ public class WebConfigTest {
 
     public WebConfigTest() {
         httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Basic YWRtaW46YWRtaW4=");
+        httpHeaders.add(AUTHORIZATION_HEADER, BASIC_AUTH);
+    }
+
+
+    @Test
+    public void staticContent_js_unauthorized_test() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/js/index.html");
+
+        ResultActions resultAction = this.mvc.perform(requestBuilder);
+        resultAction.andExpect(status().isUnauthorized());
+
+        assertTrue(resultAction.andReturn().getResponse().getContentAsString().isEmpty());
+    }
+
+    @Test
+    public void staticContent_js_JWT_test() throws Exception {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(AUTHORIZATION_HEADER, JWT_AUTH);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/js/index.html").headers(httpHeaders);
+
+        ResultActions resultAction = this.mvc.perform(requestBuilder);
+        resultAction.andExpect(status().isOk());
+
+        String contentDirectHit = resultAction.andReturn().getResponse().getContentAsString();
+        assertTrue(contentDirectHit.contains("<title>Hello WebSocket</title>"));
     }
 
     @Test
