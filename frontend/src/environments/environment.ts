@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  SOCKET_IO_ENDPOINT: 'localhost:3000'
+  SOCKET_ENDPOINT_SOCKET_IO: 'localhost:3000',
+  SOCKET_ENDPOINT_STOMP: 'localhost:8080/api/gs-guide-websocket'
 };
 
 /*
