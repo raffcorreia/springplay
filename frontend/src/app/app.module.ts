@@ -11,7 +11,7 @@ import {SqlInjectionComponent} from './sql-injection/sql-injection.component';
 import {APIInterceptor} from "./config/APIInterceptor";
 import {LoginComponent} from './login/login.component';
 import { WebSocketComponent } from './web-socket/web-socket.component';
-import {SocketioService} from "./services/socketio.service";
+import {SocketIOService} from "./services/socketio.service";
 
 @NgModule({
     declarations: [
@@ -34,7 +34,7 @@ import {SocketioService} from "./services/socketio.service";
         useClass: APIInterceptor,
         multi: true
     },
-        SocketioService
+        SocketIOService
     ],
     bootstrap: [AppComponent]
 })
