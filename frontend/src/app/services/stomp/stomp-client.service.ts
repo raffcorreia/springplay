@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {RxStompService} from "../rx-stomp.service";
+import {RxStompService} from "./rx-stomp.service";
 
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SocketIOService} from "../services/socketio.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StompClientService} from "../services/stomp-client.service";
+import {StompClientService} from "../services/stomp/stomp-client.service";
 
 const EVENT_NAME_NODE = "socketIOEvent";
 const EVENT_NAME_SPRING = "/topic/greetings";

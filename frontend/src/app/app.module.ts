@@ -12,8 +12,8 @@ import {APIInterceptor} from "./config/APIInterceptor";
 import {LoginComponent} from './login/login.component';
 import { WebSocketComponent } from './web-socket/web-socket.component';
 import {SocketIOService} from "./services/socketio.service";
-import {RxStompService} from "./rx-stomp.service";
-import {rxStompServiceFactory} from "./rx-stomp-service-factory";
+import {RxStompService} from "./services/stomp/rx-stomp.service";
+import {rxStompServiceFactory} from "./services/stomp/rx-stomp-service-factory";
 
 @NgModule({
     declarations: [
