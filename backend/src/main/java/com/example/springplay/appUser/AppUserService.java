@@ -18,7 +18,7 @@ import java.util.Objects;
 @Service
 public class AppUserService implements UserDetailsService {
 
-    private final List<String> users = Arrays.asList("admin", "user", "joe", "test", "server");
+    private final List<String> users = Arrays.asList("admin", "user", "joe", "test", "boot", "server");
 
     @Autowired
     private AuthenticationManager authenticationManager;
