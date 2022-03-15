@@ -12,13 +12,14 @@ export class UserComponent implements OnInit {
   constructor(private securityService: SecurityService) { }
 
   ngOnInit(): void {
-    this.securityService.getUserDetails().subscribe(
+    this.securityService.getUserDetails().then(
         data => {
           this.userName = data.name;
         },
         error => {
-          console.log("ERROR!");
-          this.userName = "";
+          console.log("ERROR retrieving user details!");
+          this.userName = null;
         });
+
   }
 }
