@@ -7,19 +7,19 @@ import {SecurityService} from "../services/security.service";
   styleUrls: ['./user.component.sass']
 })
 export class UserComponent implements OnInit {
-    userName: any;
+  userName: any;
 
   constructor(private securityService: SecurityService) { }
 
   ngOnInit(): void {
     this.securityService.getUserDetails().then(
-        data => {
-          this.userName = data.name;
-        },
-        error => {
-          console.log("ERROR retrieving user details!");
-          this.userName = null;
-        });
-
+      data => {
+        this.userName = data.name;
+      },
+      error => {
+        console.log("ERROR retrieving user details!");
+        this.userName = null;
+      }
+    );
   }
 }
