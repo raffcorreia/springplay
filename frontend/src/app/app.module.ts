@@ -16,6 +16,7 @@ import {RxStompService} from "./services/stomp/rx-stomp.service";
 import {rxStompServiceFactory} from "./services/stomp/rx-stomp-service-factory";
 import { UserComponent } from './user/user.component';
 import {DatePipe} from "@angular/common";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import {DatePipe} from "@angular/common";
         SqlInjectionComponent,
         LoginComponent,
         WebSocketComponent,
-        UserComponent
+        UserComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,
