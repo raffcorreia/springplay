@@ -30,6 +30,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .formLogin()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login")
         ;
     }
 
