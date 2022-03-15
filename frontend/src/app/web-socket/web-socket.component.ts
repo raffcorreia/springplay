@@ -5,7 +5,6 @@ import {StompClientService} from "../services/stomp-client.service";
 
 const EVENT_NAME_NODE = "socketIOEvent";
 const EVENT_NAME_SPRING = "/topic/greetings";
-const roomName = "publicRoom";
 
 @Component({
   selector: 'app-web-socket',
@@ -38,7 +37,6 @@ export class WebSocketComponent implements OnInit {
       this.updateMsgBoardNode(response);
     })
 
-    this.socketIOService.joinRoom(roomName);
 
     // Spring
     this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
@@ -46,8 +44,6 @@ export class WebSocketComponent implements OnInit {
     this.stompService.msgReceived.subscribe( response => {
       this.updateMsgBoardSpring(response);
     })
-
-    // this.stompService.joinRoom(roomName);
   }
 
   ngOnDestroy() {
@@ -55,7 +51,7 @@ export class WebSocketComponent implements OnInit {
   }
 
   sendMessageSIO() {
-    this.socketIOService.sendMessage( { message: this.txtSendSIO, roomName: roomName} );
+    this.socketIOService.sendMessage(this.txtSendSIO);
   }
 
   private updateMsgBoardNode(newMessage: string) {
@@ -63,7 +59,7 @@ export class WebSocketComponent implements OnInit {
   }
 
   sendMessageSTOMP() {
-    this.stompService.sendMessage( { message: this.txtSendSTOMP, roomName: roomName} );
+    this.stompService.sendMessage(this.txtSendSTOMP);
   }
 
   private updateMsgBoardSpring(newMessage: string) {

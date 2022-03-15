@@ -4,8 +4,6 @@ import {environment} from "../../environments/environment";
 
 const user : string = "user";
 
-const myRandomChatRoomId = 'myRandomChatRoomId';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -45,7 +43,7 @@ export class SocketIOService {
     }
   }
 
-  sendMessage(msgObj: {message, roomName}) {
-    if (this.socket) this.socket.emit('message', msgObj);
+  sendMessage(msgStr: string) {
+    if (this.socket) this.socket.emit('message', msgStr);
   }
 }
