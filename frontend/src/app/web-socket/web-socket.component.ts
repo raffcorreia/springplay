@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {SocketIOService} from "../services/socketio.service";
 import {FormBuilder} from "@angular/forms";
 import {StompClientService} from "../services/stomp/stomp-client.service";
+import {SecurityService} from "../services/security.service";
+import {DatePipe} from "@angular/common";
 
 const EVENT_NAME_NODE = "socketIOEvent";
 const EVENT_NAME_SPRING = "/topic/greetings";
@@ -20,7 +22,9 @@ export class WebSocketComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private socketIOService: SocketIOService,
-              private stompService: StompClientService
+              private stompService: StompClientService,
+              private securityService: SecurityService,
+              public datePipe: DatePipe
   ) {
 
     this.txtMsgsSIO = "";
@@ -42,7 +46,8 @@ export class WebSocketComponent implements OnInit {
     this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
 
     this.stompService.msgReceived.subscribe( response => {
-      this.updateMsgBoardSpring(response);
+      let message = JSON.parse(response);
+      this.updateMsgBoardSpring(message.user, message.content);
     })
   }
 
@@ -59,10 +64,14 @@ export class WebSocketComponent implements OnInit {
   }
 
   sendMessageSTOMP() {
-    this.stompService.sendMessage(this.txtSendSTOMP);
+    this.securityService.getUserDetails().then(data => {
+      this.stompService.sendMessage(data.name, this.txtSendSTOMP);
+    });
   }
 
-  private updateMsgBoardSpring(newMessage: string) {
-    this.txtMsgsSTOMP += newMessage + "\n";
+  private updateMsgBoardSpring(user: string, newMessage: string) {
+    let currentDateTime = this.datePipe.transform((new Date), 'MM/dd/yyyy h:mm:ss');
+    console.log(currentDateTime);
+    this.txtMsgsSTOMP += currentDateTime + " (" + user + "):\n- " + newMessage + "\n";
   }
 }

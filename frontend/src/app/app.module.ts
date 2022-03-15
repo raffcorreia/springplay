@@ -15,6 +15,7 @@ import {SocketIOService} from "./services/socketio.service";
 import {RxStompService} from "./services/stomp/rx-stomp.service";
 import {rxStompServiceFactory} from "./services/stomp/rx-stomp-service-factory";
 import { UserComponent } from './user/user/user.component';
+import {DatePipe} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { UserComponent } from './user/user/user.component';
         multi: true
     },
         SocketIOService,
+        DatePipe,
         {
             provide: RxStompService,
             useFactory: rxStompServiceFactory,

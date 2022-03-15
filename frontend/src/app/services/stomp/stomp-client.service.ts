@@ -19,17 +19,17 @@ export class StompClientService {
   }
 
   onMessageReceived(message) {
-    this.msgReceived.emit(JSON.parse(message).content)
+    this.msgReceived.emit(message)
   }
 
   disconnect() {
     this.rxStompService.deactivate();
   }
 
-  sendMessage(msgStr: string) {
+  sendMessage(userName: string, msgStr: string) {
     this.rxStompService.publish({
       destination: '/topic/greetings',
-      body: JSON.stringify({content: msgStr})
+      body: JSON.stringify({user: userName, content: msgStr})
     });
   }
 }

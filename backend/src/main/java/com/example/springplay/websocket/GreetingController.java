@@ -23,7 +23,7 @@ public class GreetingController {
         GreetingThread greetingThread = new GreetingThread(messageTemplate, TOPIC);
         greetingThread.start();
 
-        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
+        return new Greeting("server", "Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
 
 }
