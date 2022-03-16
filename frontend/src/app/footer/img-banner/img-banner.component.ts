@@ -9,14 +9,14 @@ import {BannerMessage} from "../banner.message";
 })
 export class ImgBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.IMG;
-  message: BannerMessage;
+  base64Img: any;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public setMessage(message: BannerMessage) {
-    this.message = message;
+  public setMessage(message: any) {
+    this.base64Img = atob(message.wideImg);
   }
 }
