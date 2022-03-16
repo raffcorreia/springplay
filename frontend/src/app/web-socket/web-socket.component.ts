@@ -46,8 +46,7 @@ export class WebSocketComponent implements OnInit {
     this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
 
     this.stompService.msgReceived.subscribe( response => {
-      let message = JSON.parse(response);
-      this.updateMsgBoardSpring(message.user, message.content);
+      this.updateMsgBoardSpring(response.user, response.content);
     })
   }
 

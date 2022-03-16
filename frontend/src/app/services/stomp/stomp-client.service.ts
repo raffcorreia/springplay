@@ -16,12 +16,12 @@ export class StompClientService {
 
     this.rxStompService.activate();
     this.rxStompService.watch(this.eventName).subscribe((message: any) => {
-      this.onMessageReceived(message.body)
+      this.onMessageReceived(message)
     });
   }
 
-  onMessageReceived(message) {
-    this.msgReceived.emit(message)
+  onMessageReceived(message: any) {
+    this.msgReceived.emit(JSON.parse(message.body));
   }
 
   disconnect() {

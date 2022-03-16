@@ -7,6 +7,7 @@ import {ErrorBannerComponent} from "./error-banner/error-banner.component";
 import {BannerType} from "./banner.type";
 import {StompClientService} from "../services/stomp/stomp-client.service";
 import {BannerMessage} from "./banner.message";
+import {RxStompService} from "../services/stomp/rx-stomp.service";
 
 const EVENT_NAME_SPRING = "/topic/banners";
 
@@ -21,17 +22,17 @@ export class FooterComponent implements OnInit {
   private components: Array<any> = [
     MotivationalBannerComponent, MsgImgBannerComponent, QABannerComponent, ImgBannerComponent, ErrorBannerComponent
   ];
+  private stompService: StompClientService = new StompClientService(this.rxStompService);
 
   constructor(private CFR: ComponentFactoryResolver,
-              private stompService: StompClientService
+              private rxStompService: RxStompService
   ) { }
 
   ngOnInit(): void {
     this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
 
-    this.stompService.msgReceived.subscribe( response => {
-      let message: BannerMessage = JSON.parse(response);
-      this.updateBanner(message);
+    this.stompService.msgReceived.subscribe(response => {
+      this.updateBanner(<BannerMessage>response);
     })
   }
 
