@@ -9,14 +9,14 @@ import {BannerMessage} from "../banner.message";
 })
 export class MotivationalBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.MOTIVATIONAL;
-  message: BannerMessage;
+  strMessage: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public setMessage(message: BannerMessage) {
-    this.message = message;
+  public setMessage(message: any) {
+    this.strMessage = message.text;
   }
 }
