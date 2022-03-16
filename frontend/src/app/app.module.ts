@@ -17,6 +17,11 @@ import {rxStompServiceFactory} from "./services/stomp/rx-stomp-service-factory";
 import { UserComponent } from './user/user.component';
 import {DatePipe} from "@angular/common";
 import { FooterComponent } from './footer/footer.component';
+import { MotivationalBannerComponent } from './footer/motivational-banner/motivational-banner.component';
+import { MsgImgBannerComponent } from './footer/msg-img-banner/msg-img-banner.component';
+import { QABannerComponent } from './footer/qabanner/qabanner.component';
+import { ImgBannerComponent } from './footer/img-banner/img-banner.component';
+import { ErrorBannerComponent } from './footer/error-banner/error-banner.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +32,12 @@ import { FooterComponent } from './footer/footer.component';
         LoginComponent,
         WebSocketComponent,
         UserComponent,
-        FooterComponent
+        FooterComponent,
+        MotivationalBannerComponent,
+        MsgImgBannerComponent,
+        QABannerComponent,
+        ImgBannerComponent,
+        ErrorBannerComponent
     ],
     imports: [
         BrowserModule,
