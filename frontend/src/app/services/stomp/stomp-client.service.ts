@@ -6,14 +6,16 @@ import {RxStompService} from "./rx-stomp.service";
   providedIn: 'root'
 })
 export class StompClientService {
-
   @Output() public msgReceived = new EventEmitter();
+  private eventName : string;
 
   constructor(private rxStompService: RxStompService) {  }
 
   setupSocketConnection(eventName : string) {
+    this.eventName = eventName;
+
     this.rxStompService.activate();
-    this.rxStompService.watch('/topic/greetings').subscribe((message: any) => {
+    this.rxStompService.watch(this.eventName).subscribe((message: any) => {
       this.onMessageReceived(message.body)
     });
   }
@@ -28,7 +30,7 @@ export class StompClientService {
 
   sendMessage(userName: string, msgStr: string) {
     this.rxStompService.publish({
-      destination: '/topic/greetings',
+      destination: this.eventName,
       body: JSON.stringify({user: userName, content: msgStr})
     });
   }
