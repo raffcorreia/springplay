@@ -9,14 +9,16 @@ import {BannerMessage} from "../banner.message";
 })
 export class QABannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.QA;
-  message: BannerMessage;
+  strQuestion: string;
+  strAnswer: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public setMessage(message: BannerMessage) {
-    this.message = message;
+  public setMessage(message: any) {
+    this.strQuestion = message.question;
+    this.strAnswer = message.answer;
   }
 }
