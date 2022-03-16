@@ -17,6 +17,8 @@ export class MotivationalBannerComponent implements OnInit {
   }
 
   public setMessage(message: any) {
-    this.strMessage = message.text;
+    if(message) {
+      this.strMessage = message.text;
+    }
   }
 }

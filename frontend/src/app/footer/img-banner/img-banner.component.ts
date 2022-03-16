@@ -17,6 +17,8 @@ export class ImgBannerComponent implements OnInit {
   }
 
   public setMessage(message: any) {
-    this.base64Img = atob(message.wideImg);
+    if(message) {
+      this.base64Img = message.wideImg ? atob(message.wideImg) : "";
+    }
   }
 }

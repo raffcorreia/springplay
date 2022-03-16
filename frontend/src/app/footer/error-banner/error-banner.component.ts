@@ -9,7 +9,7 @@ import {BannerMessage} from "../banner.message";
 })
 export class ErrorBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.ERROR;
-  message: BannerMessage;
+  text: string;
 
   constructor() { }
 
@@ -17,6 +17,8 @@ export class ErrorBannerComponent implements OnInit {
   }
 
   public setMessage(message: BannerMessage) {
-    this.message = message;
+    if(message) {
+      this.text = message.text;
+    }
   }
 }

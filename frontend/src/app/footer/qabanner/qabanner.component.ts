@@ -18,7 +18,9 @@ export class QABannerComponent implements OnInit {
   }
 
   public setMessage(message: any) {
-    this.strQuestion = message.question;
-    this.strAnswer = message.answer;
+    if(message) {
+      this.strQuestion = message.question;
+      this.strAnswer = message.answer;
+    }
   }
 }

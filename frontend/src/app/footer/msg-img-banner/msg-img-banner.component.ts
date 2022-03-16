@@ -9,7 +9,7 @@ import {BannerMessage} from "../banner.message";
 })
 export class MsgImgBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.MSG_IMG;
-  message: BannerMessage;
+  text: string;
   base64Img: string;
 
   constructor() { }
@@ -18,7 +18,9 @@ export class MsgImgBannerComponent implements OnInit {
   }
 
   public setMessage(message: any) {
-    this.message = message;
-    this.base64Img = atob(message.img);
+    if(message) {
+      this.text = message.text;
+      this.base64Img = message.img ? atob(message.img) : "";
+    }
   }
 }
