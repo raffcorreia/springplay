@@ -12,6 +12,16 @@ import {APIInterceptor} from "./config/APIInterceptor";
 import {LoginComponent} from './login/login.component';
 import { WebSocketComponent } from './web-socket/web-socket.component';
 import {SocketIOService} from "./services/socketio.service";
+import {RxStompService} from "./services/stomp/rx-stomp.service";
+import {rxStompServiceFactory} from "./services/stomp/rx-stomp-service-factory";
+import { UserComponent } from './user/user.component';
+import {DatePipe} from "@angular/common";
+import { FooterComponent } from './footer/footer.component';
+import { MotivationalBannerComponent } from './footer/motivational-banner/motivational-banner.component';
+import { MsgImgBannerComponent } from './footer/msg-img-banner/msg-img-banner.component';
+import { QABannerComponent } from './footer/qabanner/qabanner.component';
+import { ImgBannerComponent } from './footer/img-banner/img-banner.component';
+import { ErrorBannerComponent } from './footer/error-banner/error-banner.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +30,14 @@ import {SocketIOService} from "./services/socketio.service";
         HeaderComponent,
         SqlInjectionComponent,
         LoginComponent,
-        WebSocketComponent
+        WebSocketComponent,
+        UserComponent,
+        FooterComponent,
+        MotivationalBannerComponent,
+        MsgImgBannerComponent,
+        QABannerComponent,
+        ImgBannerComponent,
+        ErrorBannerComponent
     ],
     imports: [
         BrowserModule,
@@ -34,7 +51,12 @@ import {SocketIOService} from "./services/socketio.service";
         useClass: APIInterceptor,
         multi: true
     },
-        SocketIOService
+        SocketIOService,
+        DatePipe,
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+        }
     ],
     bootstrap: [AppComponent]
 })

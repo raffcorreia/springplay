@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SocketIOService} from "../services/socketio.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StompClientService} from "../services/stomp-client.service";
+import {FormBuilder} from "@angular/forms";
+import {StompClientService} from "../services/stomp/stomp-client.service";
+import {SecurityService} from "../services/security.service";
+import {DatePipe} from "@angular/common";
 
 const EVENT_NAME_NODE = "socketIOEvent";
 const EVENT_NAME_SPRING = "/topic/greetings";
-const roomName = "publicRoom";
 
 @Component({
   selector: 'app-web-socket',
@@ -21,7 +22,9 @@ export class WebSocketComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private socketIOService: SocketIOService,
-              private stompService: StompClientService
+              private stompService: StompClientService,
+              private securityService: SecurityService,
+              public datePipe: DatePipe
   ) {
 
     this.txtMsgsSIO = "";
@@ -38,16 +41,13 @@ export class WebSocketComponent implements OnInit {
       this.updateMsgBoardNode(response);
     })
 
-    this.socketIOService.joinRoom(roomName);
 
     // Spring
     this.stompService.setupSocketConnection(EVENT_NAME_SPRING);
 
     this.stompService.msgReceived.subscribe( response => {
-      this.updateMsgBoardSpring(response);
+      this.updateMsgBoardSpring(response.user, response.content);
     })
-
-    // this.stompService.joinRoom(roomName);
   }
 
   ngOnDestroy() {
@@ -55,7 +55,7 @@ export class WebSocketComponent implements OnInit {
   }
 
   sendMessageSIO() {
-    this.socketIOService.sendMessage( { message: this.txtSendSIO, roomName: roomName} );
+    this.socketIOService.sendMessage(this.txtSendSIO);
   }
 
   private updateMsgBoardNode(newMessage: string) {
@@ -63,10 +63,14 @@ export class WebSocketComponent implements OnInit {
   }
 
   sendMessageSTOMP() {
-    this.stompService.sendMessage( { message: this.txtSendSTOMP, roomName: roomName} );
+    this.securityService.getUserDetails().then(data => {
+      this.stompService.sendMessage(data.name, this.txtSendSTOMP);
+    });
   }
 
-  private updateMsgBoardSpring(newMessage: string) {
-    this.txtMsgsSTOMP += newMessage + "\n";
+  private updateMsgBoardSpring(user: string, newMessage: string) {
+    let currentDateTime = this.datePipe.transform((new Date), 'MM/dd/yyyy h:mm:ss');
+    console.log(currentDateTime);
+    this.txtMsgsSTOMP += currentDateTime + " (" + user + "):\n- " + newMessage + "\n";
   }
 }

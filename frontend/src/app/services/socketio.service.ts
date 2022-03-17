@@ -2,10 +2,6 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {io} from "socket.io-client";
 import {environment} from "../../environments/environment";
 
-const user : string = "user";
-
-const myRandomChatRoomId = 'myRandomChatRoomId';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -35,17 +31,13 @@ export class SocketIOService {
     });
   }
 
-  joinRoom(roomName: string) {
-    this.socket.emit('join', roomName);
-  }
-
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();
     }
   }
 
-  sendMessage(msgObj: {message, roomName}) {
-    if (this.socket) this.socket.emit('message', msgObj);
+  sendMessage(msgStr: string) {
+    if (this.socket) this.socket.emit('message', msgStr);
   }
 }

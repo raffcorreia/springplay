@@ -29,7 +29,7 @@ public class GreetingThread extends Thread {
             }
 
             System.out.println(this.getName() + ": New Thread is running..." + i);
-            messageTemplate.convertAndSend(topic, new Greeting("A message back from your thread: " + i));
+            messageTemplate.convertAndSend(topic, new Greeting("server", "A message back from your thread: " + i));
 
             i--;
         }
