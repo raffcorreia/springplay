@@ -10,20 +10,19 @@ import org.springframework.web.util.HtmlUtils;
 @Controller
 public class GreetingController {
 
-    public static final String TOPIC = "/topic/greetings";
+    public static final String TOPIC_GREETINGS = "/topic/greetings";
 
     @Autowired
     private SimpMessagingTemplate messageTemplate;
 
     @MessageMapping("/hello")
-    @SendTo(TOPIC)
+    @SendTo(TOPIC_GREETINGS)
     public Greeting greeting(HelloMessage message) throws Exception {
         Thread.sleep(1000); // simulated delay
 
-        GreetingThread greetingThread = new GreetingThread(messageTemplate, TOPIC);
+        GreetingThread greetingThread = new GreetingThread(messageTemplate, TOPIC_GREETINGS);
         greetingThread.start();
 
         return new Greeting("server", "Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
-
 }
