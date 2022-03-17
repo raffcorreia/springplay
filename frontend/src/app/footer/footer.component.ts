@@ -4,7 +4,6 @@ import {MsgImgBannerComponent} from "./msg-img-banner/msg-img-banner.component";
 import {QABannerComponent} from "./qabanner/qabanner.component";
 import {ImgBannerComponent} from "./img-banner/img-banner.component";
 import {ErrorBannerComponent} from "./error-banner/error-banner.component";
-import {BannerType} from "./banner.type";
 import {StompClientService} from "../services/stomp/stomp-client.service";
 import {BannerMessage} from "./banner.message";
 import {RxStompService} from "../services/stomp/rx-stomp.service";
@@ -36,20 +35,7 @@ export class FooterComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(): void {
-
-    this.replaceBanner({ type: BannerType.MOTIVATIONAL, text: "Manually created on load"});
-    setTimeout(() => {
-      console.log('sleep 1');
-      this.replaceBanner({ type: BannerType.MSG_IMG, text: "Manually created on load again!!!"});
-    }, 2000);
-  }
-
   private updateBanner(message: BannerMessage) {
-    this.replaceBanner(message)
-  }
-
-  private replaceBanner(message: BannerMessage) {
     this.VCR.remove(); //Remove last view
 
     let componentRef = this.components.find(
