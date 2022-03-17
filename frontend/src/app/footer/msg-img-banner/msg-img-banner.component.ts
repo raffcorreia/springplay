@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BannerType} from "../banner.type";
-import {BannerMessage} from "../banner.message";
+import FooterUtils from "../footer-utils";
 
 @Component({
   selector: 'app-msg-img-banner',
@@ -10,7 +10,7 @@ import {BannerMessage} from "../banner.message";
 export class MsgImgBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.MSG_IMG;
   text: string;
-  base64Img: string;
+  base64ImgData: string;
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class MsgImgBannerComponent implements OnInit {
   public setMessage(message: any) {
     if(message) {
       this.text = message.text;
-      this.base64Img = message.img ? atob(message.img) : "";
+      this.base64ImgData = FooterUtils.buildImageSrcData(message.imgType, message.img);
     }
   }
 }

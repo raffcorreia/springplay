@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BannerType} from "../banner.type";
-import {BannerMessage} from "../banner.message";
+import FooterUtils from "../footer-utils";
+
 
 @Component({
   selector: 'app-img-banner',
@@ -9,7 +10,7 @@ import {BannerMessage} from "../banner.message";
 })
 export class ImgBannerComponent implements OnInit {
   public static TYPE: BannerType = BannerType.IMG;
-  base64Img: any;
+  base64ImgData: any;
 
   constructor() { }
 
@@ -18,7 +19,7 @@ export class ImgBannerComponent implements OnInit {
 
   public setMessage(message: any) {
     if(message) {
-      this.base64Img = message.wideImg ? atob(message.wideImg) : "";
+      this.base64ImgData = FooterUtils.buildImageSrcData(message.imgType, message.wideImg);
     }
   }
 }
