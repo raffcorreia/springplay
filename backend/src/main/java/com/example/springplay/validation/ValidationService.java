@@ -1,5 +1,6 @@
 package com.example.springplay.validation;
 
+import com.example.springplay.validation.ValidationResponse.ValidationResponseBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -11,17 +12,17 @@ public class ValidationService {
 
 
     public ValidationResponse validateRequestObject(ValidationRequest requestObj) {
-        ValidationResponse response = new ValidationResponse();
-        response.setTimestamp(Instant.now());
+        ValidationResponseBuilder response = ValidationResponse.builder();
+        response.timestamp(Instant.now());
 
         ObjectMapper om = new ObjectMapper();
         try {
-            response.setValue(om.writeValueAsString(requestObj));
+            response.value(om.writeValueAsString(requestObj));
         } catch (JsonProcessingException e) {
-            response.setValue("Error converting request to string");
+            response.value("Error converting request to string");
             e.printStackTrace();
         }
 
-        return response;
+        return response.build();
     }
 }
