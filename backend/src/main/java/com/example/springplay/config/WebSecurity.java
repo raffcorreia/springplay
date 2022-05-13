@@ -1,6 +1,6 @@
 package com.example.springplay.config;
 
-import com.example.springplay.appUser.AppUserService;
+import com.example.springplay.appUser.LocalUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AppUserService appUserService;
+    private LocalUserDetailsService localUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,7 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(appUserService);
+        auth.userDetailsService(localUserDetailsService);
     }
 
     @Bean
