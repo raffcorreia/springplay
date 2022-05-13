@@ -4,6 +4,7 @@ import com.example.springplay.validation.annotation.NoAs;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,17 @@ public record ValidationRequest(
     List<@NotNull Contact> contacts,
 
     @NoAs
-    String noLetterAmessage
+    String noLetterAmessage,
+
+    @NotNull(message = "You have to choose a valid prime number.")
+    BigInteger primeNumber
 ) {
+    public ValidationRequest {
+        PrimeNumberUtil primeNumberUtil = new PrimeNumberUtil();
+        if(!primeNumberUtil.isPrime(primeNumber)) {
+            throw new IllegalArgumentException("The number (" + primeNumber + ") is not prime.");
+        }
+    }
+
+
 }
