@@ -24,12 +24,24 @@ Validated 3 as prime is true in 9000nanos
 Validated 5 as prime is true in 49000nanos
 Validated 97 as prime is true in 44000nanos
 Validated 8589935681 as prime is true in 9millis
-Validated 32361122672259149 as prime is true in 3seconds
+          99990001
+          715827883
+          200560490131
+          999999000001
+          304250263527209 -> C++ 16s
+          792606555396977 -> C++ 27s
+          1746860020068409 -> C++ 39s
+          9999999900000001 -> C++ 40s
+Validated 32361122672259149 as prime is true in 3seconds -> C++ 3min
 Validated 59604644783353249 as prime is true in 4seconds
 Validated 1111111111111111111 as prime is true in 16seconds
 Validated 2305843009213693951 as prime is true in 24seconds
 Validated 11111111111111111111111 as prime is true in 84minutes
-
+          18446744073709550592
+          11111111111111111111
+          1111111111111111111
+          446744073709551615
+          18446744073709551615
  */
 public class PrimeNumberUtilTest {
 
@@ -74,7 +86,7 @@ public class PrimeNumberUtilTest {
     }
 
     private static Stream<Arguments> dontYouDareTheseBigIntValues() {
-        Stream<Arguments> result = Stream.of(
+        return Stream.of(
                 Arguments.of(true, new BigInteger("32361122672259149")),
                 Arguments.of(true, new BigInteger("59604644783353249")),
                 Arguments.of(true, new BigInteger("1111111111111111111")),
@@ -83,7 +95,6 @@ public class PrimeNumberUtilTest {
                 Arguments.of(true, new BigInteger("523347633027360537213687137")),
                 Arguments.of(true, new BigInteger("43143988327398957279342419750374600193"))
         );
-        return Stream.concat(provideBigIntValues(), result);
     }
 
     public Duration IsPrimeDuration(boolean quickCheck, boolean expectedResult, BigInteger number) {
