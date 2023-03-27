@@ -1,5 +1,6 @@
 package com.example.springplay.appUser;
 
+import com.bot.Test;
 import com.example.springplay.config.jwt.JwtWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,10 +11,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AppUserService {
 
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
     public AuthenticationResponse login(AuthenticationRequest request) throws Exception {
+
+        com.bot.Test test = new Test();
+        test.testando1();
+
+
         Authentication auth;
 
         try {

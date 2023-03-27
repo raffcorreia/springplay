@@ -40,5 +40,6 @@
         <module>backend</module>
         <module>frontend</module>
         <module>messageBot</module>
+        <module>foreign-functions</module>
     </modules>
 </project>
